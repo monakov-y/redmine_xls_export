@@ -316,13 +316,8 @@ module Redmine
                 when :done_ratio
                   (Float(issue.send(c.name)))/100
                 when :description
-                  descr_str = ''
-                  strip_html(issue.description, options).to_s.each_char do |c_a|
-                    if c_a != "\r"
-                      descr_str << c_a
-                    end
-                  end
-                  descr_str
+                  descr_str = strip_html(issue.description, options).to_s
+                  textilizable(descr_str)
                 when :relations
                   rel_str = ''
                   relations = issue.relations.select {|r| r.other_issue(issue).visible?}
